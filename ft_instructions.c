@@ -6,12 +6,43 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:50:41 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/13 19:59:47 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/01/17 19:39:22 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+int	ft_get_less(t_strc_gen est, int *a)
+{
+	int	x;
+	int	aux;
+	
+	x = 1;
+	aux = a[x];
+	while (x != est.longa)
+	{
+		if (aux > a[x])
+			aux = a[x];
+		x++;
+	}
+	return (aux);
+}
+
+int	ft_get_max(t_strc_gen est, int *a)
+{
+	int	x;
+	int	aux;
+	
+	x = 0;
+	aux = 0;
+	while (x != est.longa)
+	{
+		if (aux < a[x])
+			aux = a[x];
+		x++;
+	}
+	return (aux);
+}
 /* sa-sb-ss
     swap entre los dos primeros numeros
 */
