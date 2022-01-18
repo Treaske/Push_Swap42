@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:11:07 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/17 19:41:49 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/01/18 20:11:56 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_strc
 	int	longa;
 	int	longb;
 	int	longc;
+	int	error;
+	int	mid;
 
 }	t_strc_gen;
 
@@ -33,7 +35,7 @@ struct s_strc	ft_swap_a(t_strc_gen estruc);
 struct s_strc	ft_swap_b(t_strc_gen estruc);
 struct s_strc	ft_swap(t_strc_gen estruc);
 
-struct s_strc	ft_pass_a(t_strc_gen estruc);
+struct s_strc	*ft_pass_a(t_strc_gen *estruc);
 struct s_strc	ft_pass_b(t_strc_gen estruc);
 
 struct s_strc	ft_rot_a(t_strc_gen estruc);
@@ -46,4 +48,8 @@ struct s_strc	ft_rrot(t_strc_gen estruc);
 
 int	ft_get_less(t_strc_gen est, int *a);
 int	ft_get_max(t_strc_gen est, int *a);
+
+void ft_three(t_strc_gen est);
+void ft_one_hun(t_strc_gen est);
+
 #endif

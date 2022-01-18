@@ -6,7 +6,7 @@
 #    By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/14 18:33:50 by ade-blas          #+#    #+#              #
-#    Updated: 2022/01/14 18:40:18 by ade-blas         ###   ########.fr        #
+#    Updated: 2022/01/18 18:02:56 by ade-blas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ RM		= /bin/rm -f
 NAME	= push_swap.a
 
 INCLUDE	= push_swap.h
-SRCS	= push_swap.c ft_instructions.c
+SRCS	= push_swap.c ft_instructions.c ft_algorithms.c
 
 OBJS	= $(SRCS:.c=.o)
 

@@ -6,13 +6,13 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:47:48 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/17 20:09:31 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/01/18 19:50:07 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *str, t_strc_gen *est)
 {
 	int	num;
 	int	sign;
@@ -21,24 +21,26 @@ int	ft_atoi(const char *str)
 	num = 0;
 	sign = 1;
 	cont = 0;
-	while (*str == ' ' || *str == '\t' || *str == '\f'
-		|| *str == '\r' || *str == '\n' || *str == '\v')
-		str++;
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')
 			sign = -1;
 		str++;
 	}
-	while (str[cont] >= '0' && str[cont] <= '9')
+	while (str[cont] >= '0' && str[cont] <= '9' && str[cont] != 0)
 	{
 		num = (num * 10) + (str[cont] - 48);
 		cont++;
 	}
+	if (str[cont] != 0 || num < -2147483648 || num > 2147483647)
+	{
+		est->error = 1;
+		return (0);
+	}
 	return (num * sign);
 }
 
-int *ft_get_number(int len, char **argv)
+int *ft_get_number(int len, char **argv, t_strc_gen *est)
 {
 	int	*a;
 	int aux;
@@ -46,11 +48,12 @@ int *ft_get_number(int len, char **argv)
 
 	aux = 0;
 	x = 0;
-	a = malloc(sizeof(int) * len + 1);
-	a[len] = 0;
+	a = malloc(sizeof(int) * len);
 	while (x != len)
 	{
-		aux = ft_atoi(argv[x + 1]);
+		aux = ft_atoi(argv[x + 1], est);
+		if (est->error != 0)
+			return (0);
 		a[x] = aux;
 		printf(" <%i> ", a[x]);
 		x++;
@@ -58,129 +61,103 @@ int *ft_get_number(int len, char **argv)
 	return (a);
 }
 
-int *ft_clean(int *a, int len)
+struct s_strc ft_make_c(t_strc_gen est)
 {
-	int	*c;
 	int	x;
 	int	aux;
 	int	y;
 	
 	x = 0;
 	y = 1;
-	c = malloc(sizeof(int) * len);
-	while (x != len)
+	est.c = malloc(sizeof(int) * est.longa);
+	while (x != est.longa)
 	{
-		c[x] = a[x];
+		est.c[x] = est.a[x];
 		x++;
 	}
-	while (y != len)
+	while (y != est.longa)
 	{
 		x = 0;
-		y = 0;
-		while (x != len)
+		y = 1;
+		while (x + 1 != est.longa)
 		{
-			if (c[x] > c[x + 1])
+			if (est.c[x] == est.c[x + 1])
 			{
-				aux = c[x];
-				c[x] = c[x + 1];
-				c[x + 1] = aux;	
+				est.error = 2;
+				return (est);
+			}
+			if (est.c[x] > est.c[x + 1])
+			{
+				aux = est.c[x];
+				est.c[x] = est.c[x + 1];
+				est.c[x + 1] = aux;	
 			}
 			else 
 				y++;
 			x++;
 		}
 	}
-	return (c);
+	return (est);
 }
 
-void	ft_three(t_strc_gen est)
+/*void ft_clean_max(t_strc_gen est)
 {
-	int	min;
-	int	max;
+	//free(est.a);
+	//free(est.b);
+	//free(est.c);
+}*/
 
-	min = ft_get_less(est, est.a);
-	max = ft_get_max(est, est.a);
-
-	printf("    - %i-     ", min);
-	printf("    - %i-     ", max);
-
-	if (est.a[1] == min)
-	{
-		if (est.a[2] == max)
-			ft_swap_a(est);
-		else
-			ft_rot_a(est);
-	}
-	else if (est.a[1] == max)
-	{
-		if (est.a[0] == min)
-		{
-			ft_swap_a(est);
-			ft_rot_a(est);
-		}
-		else
-			ft_rrot_a(est);
-	}
-	else
-	{
-		ft_swap_a(est);
-		ft_rrot_a(est);
-	}
-}
-
-void ft_five(t_strc_gen est)
-{
-	int	min;
-	int	max;
-
-	min = ft_get_less(est, est.a);
-	max = ft_get_max(est, est.a);
-	ft_pass_a(est);
-	ft_pass_a(est);
-	ft_three(est);
-	ft_pass_b(est);
-	if (est.a[0] == max)
-		ft_rrot_a(est);
-	else
-	{
-		if (est.a[0] > est.a[1])
-			
-	}
-	
-}
-
-void ft_clean_max(t_strc_gen est)
-{
-	free(est.a);
-	free(est.b);
-	free(est.c);
-}
 int	main(int argc, char **argv)
 {
 	t_strc_gen	est;
-	int			*c;
 	int			x;
 
 	x = 0;
-	est.longa = argc -1;
-	est.a = ft_get_number(est.longa, argv);
-	c = ft_clean(est.a, est.longa);
-	while (x != est.longa)
+	est.longa = argc - 1;
+	est.error = 0;
+	est.a = ft_get_number(est.longa, argv, &est);
+	est.longc = est.longa;
+	if (est.error != 0)
 	{
-		printf(" - %i- ", c[x]);
-		x++;
+		printf("ERROR\n");
+		return (0);
 	}
+	est = ft_make_c(est);
+	est.mid = est.c[est.longa/2];
+	printf("    .%i.  ", est.mid);
+	/*while (x != est.longa)
+	{
+		printf("  ** %i **   ", est.c[x]);
+		printf("       ");
+		x++;
+	}*/
+	if (est.error != 0)
+	{
+		printf("ERROR\n");
+		return (0);
+	}
+	/*while (x != est.longa)
+	{
+		printf(" - %i- ", est.a[x]);
+		printf("       ");
+		x++;
+	}*/
 	if (est.longa == 3)
 		ft_three(est);
-	else if(est.longa <= 5)
-		ft_five(est);
+	else
+	{
+		ft_one_hun(est);
+		printf("loco\n");
+	}
+		
 	x = 0;
 	while (x != est.longa)
 	{
-		printf(" - %i- ", c[x]);
+		printf(" - %i- ", est.a[x]);
 		x++;
 	}
-	ft_clean_max(est);
+	//ft_clean_max(est);
+	return (0);
 }
 
 /*int	main(void)

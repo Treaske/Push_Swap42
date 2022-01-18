@@ -6,43 +6,11 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:50:41 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/17 19:39:22 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/01/18 20:11:13 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	ft_get_less(t_strc_gen est, int *a)
-{
-	int	x;
-	int	aux;
-	
-	x = 1;
-	aux = a[x];
-	while (x != est.longa)
-	{
-		if (aux > a[x])
-			aux = a[x];
-		x++;
-	}
-	return (aux);
-}
-
-int	ft_get_max(t_strc_gen est, int *a)
-{
-	int	x;
-	int	aux;
-	
-	x = 0;
-	aux = 0;
-	while (x != est.longa)
-	{
-		if (aux < a[x])
-			aux = a[x];
-		x++;
-	}
-	return (aux);
-}
 /* sa-sb-ss
     swap entre los dos primeros numeros
 */
@@ -83,32 +51,35 @@ struct s_strc	ft_swap(t_strc_gen estruc)
     pass el primer numero de una columna a la otra
 */
 
-struct s_strc	ft_pass_a(t_strc_gen estruc)
+struct s_strc	*ft_pass_a(t_strc_gen *est)
 {
 	int	x;
 	int	*auxa;
 	int *auxb;
 
 	x = 1;
-	auxa = malloc (sizeof(int) * (estruc.longa) - 1);
-	auxb = malloc (sizeof(int) * (estruc.longb) + 1);
-	auxb[0] = estruc.a[0];
-	while (x != (estruc.longb) + 1)
+	auxa = malloc (sizeof(int) * (est->longa) - 1);
+	auxb = malloc (sizeof(int) * (est->longb) + 1);
+	est->longb++;
+	printf(" ..%i..\n", est->longb);
+	auxb[0] = est->a[0];
+	while (x != (est->longb))
 	{
-		auxb[x] = estruc.b[x - 1];
+		auxb[x] = est->b[x - 1];
 		x++;
 	}
 	x = 0;
-	while (x != ((estruc.longa) - 1))
+	while (x != ((est->longa) - 1))
 	{
-		auxa[x] = estruc.a[x + 1];
+		auxa[x] = est->a[x + 1];
 		x++;
 	}
-	free(estruc.a);
-	free(estruc.b);
-	estruc.b = auxb;
-	estruc.a = auxa;
-	return (estruc);
+	printf(" ==LOCO== ");
+	free(est->a);
+	free(est->b);
+	est->b = auxb;
+	est->a = auxa;
+	return (est);
 }
 
 struct s_strc	ft_pass_b(t_strc_gen estruc)
