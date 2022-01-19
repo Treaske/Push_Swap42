@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 17:57:26 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/18 20:06:05 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/01/19 18:09:13 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,21 @@ void	ft_three(t_strc_gen est)
 	}
 }
 
+int	ft_check_lower(t_strc_gen est)
+{
+	int	x;
+
+	x = 0;
+	while (x < est.longa)
+	{
+		if (est.a[x] < est.mid)
+		{
+			return (1);
+		}
+		x++;
+	}
+	return (0);
+}
 void	ft_one_hun(t_strc_gen est)
 {
 	int	x;
@@ -46,19 +61,22 @@ void	ft_one_hun(t_strc_gen est)
 	printf(" ..%i..\n", est.longa);
 	printf(",,%i,,\n", est.longb);
 	printf(" ..%i..\n", est.mid);
-	while (x != est.longa)
+	while (ft_check_lower(est) != 0)
 	{
+		printf(" .....%i.......\n", est.a[0]);
 		if (est.a[0] < est.mid)
+		{
+			printf(" .....%i.......\n", est.a[0]);
+			ft_pass_a(est);
+			//printf(" &%i&\n", est.b[0]);
+		}
+		else
 		{
 			printf(" .%i.\n", est.a[0]);
 			ft_rot_a(est);
 			printf(" ,%i,\n", est.a[0]);
+			
 		}
-		else
-		{
-			ft_pass_a(est);
-		}
-		x++;
 	}
 	x = 0;
 	while (x != est.longb)

@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:11:07 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/18 20:11:56 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/01/19 17:47:22 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ struct s_strc	ft_swap_a(t_strc_gen estruc);
 struct s_strc	ft_swap_b(t_strc_gen estruc);
 struct s_strc	ft_swap(t_strc_gen estruc);
 
-struct s_strc	*ft_pass_a(t_strc_gen *estruc);
+struct s_strc	ft_pass_a(t_strc_gen estruc);
 struct s_strc	ft_pass_b(t_strc_gen estruc);
 
 struct s_strc	ft_rot_a(t_strc_gen estruc);

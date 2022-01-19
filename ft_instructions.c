@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:50:41 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/18 20:11:13 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/01/19 18:07:53 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,34 +51,37 @@ struct s_strc	ft_swap(t_strc_gen estruc)
     pass el primer numero de una columna a la otra
 */
 
-struct s_strc	*ft_pass_a(t_strc_gen *est)
+struct s_strc	ft_pass_a(t_strc_gen est)
 {
 	int	x;
 	int	*auxa;
 	int *auxb;
 
 	x = 1;
-	auxa = malloc (sizeof(int) * (est->longa) - 1);
-	auxb = malloc (sizeof(int) * (est->longb) + 1);
-	est->longb++;
-	printf(" ..%i..\n", est->longb);
-	auxb[0] = est->a[0];
-	while (x != (est->longb))
+	auxa = malloc (sizeof(int) * (est.longa) - 1);
+	auxb = malloc (sizeof(int) * (est.longb) + 1);
+	est.longb++;
+	printf(" ..%i..\n", est.longb);
+	auxb[0] = est.a[0];
+	while (x != (est.longb))
 	{
-		auxb[x] = est->b[x - 1];
+		auxb[x] = est.b[x - 1];
 		x++;
 	}
 	x = 0;
-	while (x != ((est->longa) - 1))
+	while (x != ((est.longa) - 1))
 	{
-		auxa[x] = est->a[x + 1];
+		auxa[x] = est.a[x + 1];
 		x++;
 	}
 	printf(" ==LOCO== ");
-	free(est->a);
-	free(est->b);
-	est->b = auxb;
-	est->a = auxa;
+	printf(" .....%i.......\n", est.a[0]);
+	free(est.a);
+	free(est.b);
+	printf(" .....%i.......\n", est.a[0]);
+	est.b = auxb;
+	est.a = auxa;
+	printf(" .....%i.......\n", est.a[0]);
 	return (est);
 }
 
