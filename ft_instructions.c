@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:50:41 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/19 18:07:53 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/01/20 20:09:17 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ struct s_strc	ft_swap_a(t_strc_gen estruc)
 {
 	int	num;
 
+	printf("====SA====\n");
 	num = estruc.a[0];
 	estruc.a[0] = estruc.a[1];
 	estruc.a[1] = num;
@@ -58,30 +59,32 @@ struct s_strc	ft_pass_a(t_strc_gen est)
 	int *auxb;
 
 	x = 1;
-	auxa = malloc (sizeof(int) * (est.longa) - 1);
-	auxb = malloc (sizeof(int) * (est.longb) + 1);
 	est.longb++;
-	printf(" ..%i..\n", est.longb);
+	est.longa--;
+	printf("====pb====\n");
+	auxa = malloc (sizeof(int) * (est.longa));
+	auxb = malloc (sizeof(int) * (est.longb));
 	auxb[0] = est.a[0];
-	while (x != (est.longb))
+	
+	if (est.longb != 1)
 	{
-		auxb[x] = est.b[x - 1];
-		x++;
+		while (x != (est.longb))
+		{
+			auxb[x] = est.b[x - 1];
+			x++;
+		}
 	}
 	x = 0;
-	while (x != ((est.longa) - 1))
+	while (x != ((est.longa)))
 	{
 		auxa[x] = est.a[x + 1];
 		x++;
 	}
-	printf(" ==LOCO== ");
-	printf(" .....%i.......\n", est.a[0]);
-	free(est.a);
-	free(est.b);
-	printf(" .....%i.......\n", est.a[0]);
+	x = 0;
+	est.a = malloc (sizeof(int) * (est.longa));
+	est.b = malloc (sizeof(int) * (est.longb));
 	est.b = auxb;
 	est.a = auxa;
-	printf(" .....%i.......\n", est.a[0]);
 	return (est);
 }
 
@@ -92,8 +95,10 @@ struct s_strc	ft_pass_b(t_strc_gen estruc)
 	int *auxb;
 
 	x = 1;
-	auxb = malloc (sizeof(int) * (estruc.longb) - 1);
-	auxa = malloc (sizeof(int) * (estruc.longa) + 1);
+	estruc.longb--;
+	estruc.longa++;
+	auxb = malloc (sizeof(int) * (estruc.longb));
+	auxa = malloc (sizeof(int) * (estruc.longa));
 	auxa[0] = estruc.b[0];
 	while (x != (estruc.longa) + 1)
 	{
@@ -123,6 +128,7 @@ struct s_strc	ft_rot_a(t_strc_gen estruc)
 	int	num;
 	int	x;
 
+	printf("====ra====\n");
 	num = estruc.longa;
 	x = 0;
 	aux = estruc.a[0];

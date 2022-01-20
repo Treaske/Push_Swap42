@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:11:07 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/19 17:47:22 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:25:48 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,20 @@ typedef struct s_strc
 
 }	t_strc_gen;
 
-struct s_strc	ft_swap_a(t_strc_gen estruc);
-struct s_strc	ft_swap_b(t_strc_gen estruc);
-struct s_strc	ft_swap(t_strc_gen estruc);
+t_strc_gen	ft_swap_a(t_strc_gen estruc);
+t_strc_gen	ft_swap_b(t_strc_gen estruc);
+t_strc_gen	ft_swap(t_strc_gen estruc);
 
-struct s_strc	ft_pass_a(t_strc_gen estruc);
-struct s_strc	ft_pass_b(t_strc_gen estruc);
+t_strc_gen	ft_pass_a(t_strc_gen estruc);
+t_strc_gen	ft_pass_b(t_strc_gen estruc);
 
-struct s_strc	ft_rot_a(t_strc_gen estruc);
-struct s_strc	ft_rot_b(t_strc_gen estruc);
-struct s_strc	ft_rot(t_strc_gen estruc);
+t_strc_gen	ft_rot_a(t_strc_gen estruc);
+t_strc_gen	ft_rot_b(t_strc_gen estruc);
+t_strc_gen	ft_rot(t_strc_gen estruc);
 
-struct s_strc	ft_rrot_a(t_strc_gen estruc);
-struct s_strc	ft_rrot_b(t_strc_gen estruc);
-struct s_strc	ft_rrot(t_strc_gen estruc);
+t_strc_gen	ft_rrot_a(t_strc_gen estruc);
+t_strc_gen	ft_rrot_b(t_strc_gen estruc);
+t_strc_gen	ft_rrot(t_strc_gen estruc);
 
 int	ft_get_less(t_strc_gen est, int *a);
 int	ft_get_max(t_strc_gen est, int *a);
