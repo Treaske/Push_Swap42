@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:11:07 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/20 16:25:48 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/01/21 18:04:43 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_strc
 	int	longa;
 	int	longb;
 	int	longc;
+	int	aux;
 	int	error;
 	int	mid;
 

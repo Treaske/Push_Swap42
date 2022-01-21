@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:47:48 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/20 17:07:58 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/01/21 19:37:26 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int	main(int argc, char **argv)
 	est.longa = argc - 1;
 	est.longb = 0;
 	est.error = 0;
+	est.aux = 3;
 	est.a = ft_get_number(est.longa, argv, &est);
 	est.longc = est.longa;
 	if (est.error != 0)

@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 17:57:26 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/20 20:27:26 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/01/21 19:33:54 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,37 @@ int	ft_check_lower(t_strc_gen est)
 	return (0);
 }
 
-int	ft_get_count(t_strc_gen est)
+int	ft_get_count(t_strc_gen *est)
 {
-	int	count1;
-	int	count2;
+	int	count;
+	int	x;
 
-	count1 = 0;
-	count2 = 0;
-	while (est.a[count1] != est.c[98])
-		count1++;
-	while (est.a[count2] != est.c[98])
-		count2++;
-	if (count1 > count2)
-		return (count2);
-	return (count1);
+	x = 0;
+	count = 0;
+	/* MOSTRAR LAS DOS LISTAS*/
+		x = 0;
+		while (x != est->longb)
+		{
+			printf(" \nb=%i= ", est->b[x]);
+			x++;
+		}
+		x = 0;
+		while (x != est->longa)
+		{
+			printf(" \na=%i= ", est->a[x]);
+			x++;
+		}
+	printf("\n  -- ENTRA A GET_COUNT---\n");
+	printf("\n  NUMERO AUXILIAR : %i\n", est->aux);
+	while (est->b[count] != est->c[est->longc - est->aux])
+		count++;
+	printf("\n  NUMERO cont : %i\n", est->b[count]);
+	est->aux++;
+	if (count < (est->longb/2))
+		return (1); 
+	//si es menos de la mitad de la longitud lo mejor es rot_b
+	printf("\n  -- SALE A GET_COUNT---\n");
+	return (2);
 }
 
 void	ft_one_hun(t_strc_gen est)
@@ -97,14 +114,61 @@ void	ft_one_hun(t_strc_gen est)
 			}
 			
 		}
-		/* ORDENAR LOS DOS QUE SE QUEDAN */
+		
+	}
+	
+	/* ORDENAR LOS DOS QUE SE QUEDAN */
 		if (est.a[0] > est.a[1])
 			est = ft_swap_a(est);
-		/* IR METIENDO UNO A UNO, OBSERVANDO SI SALE MEJOR HACER RRA O RA HASTA LLEGAR AL NUMERO*/
-		aux = ft_get_count(est);
-		printf(" \nmid: %i ", est.mid);
-		//est.mid = est.c[aux-1];
-		printf(" \nmid: %i ", est.mid);
+	/* IR METIENDO UNO A UNO, OBSERVANDO SI SALE MEJOR HACER RRA O RA HASTA LLEGAR AL NUMERO*/
+	
+	/* MOSTRAR LAS DOS LISTAS*/
+		x = 0;
+		while (x != est.longb)
+		{
+			printf(" \nb=%i= ", est.b[x]);
+			x++;
+		}
+		x = 0;
+		while (x != est.longa)
+		{
+			printf(" \na=%i= ", est.a[x]);
+			x++;
+		}
+
+		
+	while (est.longa != est.longc)
+	{
+		x = 2;
+		printf("\n  --1 ENTRA A WHILE---\n");
+		if (ft_get_count(&est) == 1)
+		{
+			printf("\n  --1 ENTRA A IF---\n");
+			while (est.b[0] != est.c[est.longc - x])
+			{
+				printf("\n  --2 a ENTRA A WHILE---\n");
+				est = ft_rot_b(est);
+				x++;
+			}	
+		}
+		else
+		{
+			printf("\n  --2 ENTRA A IF---\n");
+			while (est.b[0] != est.c[est.longc - x])
+			{
+				printf("\n  --2 b ENTRA A WHILE---\n");
+				est = ft_rrot_b(est);
+				printf(" \nNUMERO EST.B =%i= ", est.b[x]);
+				printf(" \nNUMERO DE EST.C=%i= ", est.c[est.longc - est.aux]);
+				x++;
+			}	
+		}
+		printf("\n  --SALE WHILE---\n");
+		est.aux++;
+		est = ft_pass_b(est);
+		getchar();
+	}
+	/* MOSTRAR LAS DOS LISTAS*/
 		x = 0;
 		while (x != est.longb)
 		{
@@ -118,6 +182,4 @@ void	ft_one_hun(t_strc_gen est)
 			x++;
 		}
 		
-	}
-	
 }

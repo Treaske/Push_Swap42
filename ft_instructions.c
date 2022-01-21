@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:50:41 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/20 20:09:17 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/01/21 19:15:51 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,42 +80,59 @@ struct s_strc	ft_pass_a(t_strc_gen est)
 		auxa[x] = est.a[x + 1];
 		x++;
 	}
-	x = 0;
-	est.a = malloc (sizeof(int) * (est.longa));
-	est.b = malloc (sizeof(int) * (est.longb));
+	/*free(est.a);
+	free(est.b);*/
 	est.b = auxb;
 	est.a = auxa;
 	return (est);
 }
 
-struct s_strc	ft_pass_b(t_strc_gen estruc)
+struct s_strc	ft_pass_b(t_strc_gen est)
 {
 	int	x;
 	int	*auxa;
 	int *auxb;
 
 	x = 1;
-	estruc.longb--;
-	estruc.longa++;
-	auxb = malloc (sizeof(int) * (estruc.longb));
-	auxa = malloc (sizeof(int) * (estruc.longa));
-	auxa[0] = estruc.b[0];
-	while (x != (estruc.longa) + 1)
+	est.longa++;
+	est.longb--;
+	printf("====pa====\n");
+	auxa = malloc (sizeof(int) * (est.longa));
+	auxb = malloc (sizeof(int) * (est.longb));
+	auxa[0] = est.b[0];
+	
+	if (est.longa != 1)
 	{
-		auxa[x] = estruc.a[x - 1];
-		x++;
+		while (x != (est.longa))
+		{
+			auxa[x] = est.a[x - 1];
+			x++;
+		}
 	}
 	x = 0;
-	while (x != ((estruc.longb) - 1))
+	while (x != ((est.longb)))
 	{
-		auxb[x] = estruc.b[x + 1];
+		auxb[x] = est.b[x + 1];
 		x++;
 	}
-	free(estruc.a);
-	free(estruc.b);
-	estruc.b = auxb;
-	estruc.a = auxa;
-	return (estruc);
+	/*free(est.a);
+	free(est.b);*/
+	est.b = auxb;
+	est.a = auxa;
+	/* MOSTRAR LAS DOS LISTAS*/
+		x = 0;
+		while (x != est.longb)
+		{
+			printf(" \nb=%i= ", est.b[x]);
+			x++;
+		}
+		x = 0;
+		while (x != est.longa)
+		{
+			printf(" \na=%i= ", est.a[x]);
+			x++;
+		}
+	return (est);
 }
 
 /* ra - rb - rr
@@ -150,6 +167,7 @@ struct s_strc	ft_rot_b(t_strc_gen estruc)
 
 	num = estruc.longb;
 	x = 0;
+	printf("====rot====\n");
 	aux = estruc.b[0];
 	estruc.b[num] = aux;
 	while(x != num)
@@ -201,6 +219,7 @@ struct s_strc	ft_rrot_b(t_strc_gen estruc)
 
 	num = estruc.longb;
 	x = 0;
+	printf("====rrot====\n");
 	aux2 = estruc.b[num-1];
 	while (num != x)
 	{
