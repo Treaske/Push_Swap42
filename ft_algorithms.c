@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 17:57:26 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/21 19:33:54 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/01/24 18:08:56 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,20 @@ int	ft_get_count(t_strc_gen *est)
 		}
 	printf("\n  -- ENTRA A GET_COUNT---\n");
 	printf("\n  NUMERO AUXILIAR : %i\n", est->aux);
+	//if(est->b[count] != est->c[est->longc - est->aux])
+	//printf("\n  NUMERO DE B : %i\n", est->b[count]);
+	//printf("\n  NUMERO A BUSCAR  : %i\n", est->c[est->longc - est->aux]);
+
 	while (est->b[count] != est->c[est->longc - est->aux])
+	{
+		printf("\n  NUMERO AUXILIAR : %i\n", est->aux);
+		printf("\n  NUMERO a buscar : %i\n", est->c[est->longc - est->aux]);
+		printf("\n  -- ENTRA A GET_COUNT while---\n");
 		count++;
+		//getchar();
+	}
 	printf("\n  NUMERO cont : %i\n", est->b[count]);
-	est->aux++;
+	printf("\n  NUMERO medio : %i\n", est->longb/2);
 	if (count < (est->longb/2))
 		return (1); 
 	//si es menos de la mitad de la longitud lo mejor es rot_b
@@ -87,7 +97,7 @@ int	ft_get_count(t_strc_gen *est)
 	return (2);
 }
 
-void	ft_one_hun(t_strc_gen est)
+struct s_strc	ft_one_hun(t_strc_gen est)
 {
 	int	x;
 	int	aux;
@@ -139,34 +149,41 @@ void	ft_one_hun(t_strc_gen est)
 		
 	while (est.longa != est.longc)
 	{
-		x = 2;
 		printf("\n  --1 ENTRA A WHILE---\n");
 		if (ft_get_count(&est) == 1)
 		{
 			printf("\n  --1 ENTRA A IF---\n");
-			while (est.b[0] != est.c[est.longc - x])
+			if (est.b[0] != est.c[est.longc - est.aux])
 			{
-				printf("\n  --2 a ENTRA A WHILE---\n");
-				est = ft_rot_b(est);
-				x++;
-			}	
+				printf(" \nNUMERO a buscar =%i= ", est.c[est.longc - est.aux]);
+				printf(" \nNUMERO a buscar =%i= ", est.b[0]);
+				while (est.b[0] != est.c[est.longc - est.aux])
+				{
+					printf("\n  --2 a ENTRA A WHILEeeeee---\n");
+					est = ft_rot_b(est);
+				}
+			}
 		}
 		else
 		{
 			printf("\n  --2 ENTRA A IF---\n");
-			while (est.b[0] != est.c[est.longc - x])
+			if (est.b[0] != est.c[est.longc - est.aux])
 			{
-				printf("\n  --2 b ENTRA A WHILE---\n");
-				est = ft_rrot_b(est);
-				printf(" \nNUMERO EST.B =%i= ", est.b[x]);
-				printf(" \nNUMERO DE EST.C=%i= ", est.c[est.longc - est.aux]);
-				x++;
-			}	
+				printf(" \nNUMERO a buscar =%i= ", est.c[est.longc - est.aux]);
+				printf(" \nNUMERO a buscar =%i= ", est.b[0]);
+				while (est.b[0] != est.c[est.longc - est.aux])
+				{
+					printf("\n  --2 b ENTRA A WHILE---\n");
+					est = ft_rrot_b(est);
+					printf(" \nNUMERO EST.B =%i= ", est.b[x]);
+					printf(" \nNUMERO DE EST.C=%i= ", est.c[est.longc - est.aux]);
+				}
+			}
 		}
 		printf("\n  --SALE WHILE---\n");
 		est.aux++;
 		est = ft_pass_b(est);
-		getchar();
+		//getchar();
 	}
 	/* MOSTRAR LAS DOS LISTAS*/
 		x = 0;
@@ -181,5 +198,7 @@ void	ft_one_hun(t_strc_gen est)
 			printf(" \na=%i= ", est.a[x]);
 			x++;
 		}
+		getchar();
+	return (est);
 		
 }

@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:11:07 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/21 18:04:43 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/01/24 18:07:20 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_strc
 	int	longb;
 	int	longc;
 	int	aux;
+	int	count_mov;
 	int	error;
 	int	mid;
 
@@ -51,6 +52,6 @@ int	ft_get_less(t_strc_gen est, int *a);
 int	ft_get_max(t_strc_gen est, int *a);
 
 void ft_three(t_strc_gen est);
-void ft_one_hun(t_strc_gen est);
+t_strc_gen ft_one_hun(t_strc_gen est);
 
 #endif

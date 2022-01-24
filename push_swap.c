@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:47:48 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/21 19:37:26 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/01/24 18:05:54 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int	main(int argc, char **argv)
 	est.longb = 0;
 	est.error = 0;
 	est.aux = 3;
+	est.count_mov = 0;
 	est.a = ft_get_number(est.longa, argv, &est);
 	est.longc = est.longa;
 	if (est.error != 0)
@@ -148,7 +149,7 @@ int	main(int argc, char **argv)
 		ft_three(est);
 	else
 	{
-		ft_one_hun(est);
+		est = ft_one_hun(est);
 	}
 		
 	x = 0;
@@ -158,6 +159,7 @@ int	main(int argc, char **argv)
 		x++;
 	}
 	//ft_clean_max(est);
+	printf(" \nNUMERO DE MOVIMIENTOS- %i- \n", est.count_mov);
 	return (0);
 }
 
@@ -165,7 +167,6 @@ int	main(int argc, char **argv)
 {
 	int			x;
 	t_strc_gen	estruc;
-
 	x = 0;
 	estruc.a = malloc (sizeof(int) * 6);
 	estruc.b = malloc (sizeof(int) * 6);
