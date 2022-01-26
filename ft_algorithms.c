@@ -186,7 +186,7 @@ struct s_strc	ft_five_hun(t_strc_gen est)
 		y = 0;
 		while (y != est.longc)
 		{
-			if (((est.a[y] >> j) & 1) == 0)
+			if (((est.a[0] >> j) & 1) == 0)
 				est = ft_pass_a(est);
 			else
 				est = ft_rrot_a(est);
