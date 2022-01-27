@@ -122,11 +122,10 @@ struct s_strc	ft_pass_b(t_strc_gen est)
 		auxb[x] = est.b[x + 1];
 		x++;
 	}
-	//free(est.a);
-	//free(est.b);
+	free(est.a);
+	free(est.b);
 	est.b = auxb;
 	est.a = auxa;
-	
 	est.count_mov++;
 	return (est);
 }
@@ -210,6 +209,7 @@ struct s_strc	ft_rrot_a(t_strc_gen estruc)
 	int	x;
 
 	num = estruc.longa;
+	printf("====rrot A====\n");
 	x = 0;
 	aux2 = estruc.a[num-1];
 	while(num != x)
@@ -232,7 +232,7 @@ struct s_strc	ft_rrot_b(t_strc_gen estruc)
 
 	num = estruc.longb;
 	x = 0;
-	printf("====rrot====\n");
+	printf("====rrot B====\n");
 	aux2 = estruc.b[num-1];
 	while (num != x)
 	{
