@@ -154,7 +154,9 @@ struct s_strc	ft_five_hun(t_strc_gen est)
 	int	x;
 	int	j;
 	int	y;
+	int i;
 
+	i = 0;
 	x = 0;
 	y = 0;
 	j = 0;
@@ -174,14 +176,17 @@ struct s_strc	ft_five_hun(t_strc_gen est)
 	// sacar la longitud en bytes
 
 	// x = ft_long_binary(est);
-	x = 10;
+	while((est.c[est.longc - 1] >> i) != 0)
+	{
+		i++;
+	}
 
 	// sacar la longitud en bytes
 
 	// bucle que pasa los 0 a b
 
 	j = 0;
-	while (j != x)
+	while (j != i)
 	{
 		y = 0;
 		while (y < est.longc)
@@ -193,17 +198,18 @@ struct s_strc	ft_five_hun(t_strc_gen est)
 			y++;
 		}
 		// volver a pasar á a
-		y = 1;
+		y = est.longb;
 		printf("\n longitud de B: %i\n", est.longb);
-		while (y != est.longb)
+		
+		while (y != 0)
 		{	
 			est = ft_pass_b(est);
 			printf("numero: %i", y);
-			y++;
+			y--;
 			
 		}
-		
 		j++;
+		printf("\n j: %i\n", j);
 		/* MOSTRAR LAS DOS LISTAS*/
 		x = 0;
 		while (x != est.longb)
@@ -217,10 +223,8 @@ struct s_strc	ft_five_hun(t_strc_gen est)
 			printf(" \na=%i= ", est.a[x]);
 			x++;
 		}
-		x = 10;
+		
+		x = 9;
 	}
-
-	printf("ERROR\n");
-	
 	return (est);
 }

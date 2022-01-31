@@ -28,9 +28,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS) $(INCLUDE)
 			$(LIB1) $(NAME) $(OBJS)
 			$(LIB2) $(NAME)
-
-.c.o:
-			$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $(<:.c=.o)
+			$(CC) $(CFLAGS) $(NAME)
 
 clean:
 			$(RM) $(OBJS) $(BONUS_O)

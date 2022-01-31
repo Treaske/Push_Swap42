@@ -65,7 +65,7 @@ struct s_strc	ft_pass_a(t_strc_gen est)
 	est.longb++;
 	est.longa--;
 	
-	printf("====pb====\n");
+	printf("====pb====");
 	auxa = malloc (sizeof(int) * (est.longa));
 	auxb = malloc (sizeof(int) * (est.longb));
 	auxb[0] = est.a[0];
@@ -103,8 +103,9 @@ struct s_strc	ft_pass_b(t_strc_gen est)
 
 	x = 1;
 	est.longa++;
-	est.longb--;
-	printf("====pa====\n");
+	if (est.longb > 0)
+		est.longb--;
+	printf("====pa====");
 	auxa = malloc (sizeof(int) * (est.longa));
 	auxb = malloc (sizeof(int) * (est.longb));
 	auxa[0] = est.b[0];
