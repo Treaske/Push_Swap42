@@ -102,13 +102,14 @@ struct s_strc	ft_one_hun(t_strc_gen est)
 		}
 		
 	}
-	
+	getchar();
+	printf(" \nORDENAMOS LOS QUE QUEDAN ");
 	/* ORDENAR LOS DOS QUE SE QUEDAN */
 		if (est.a[0] > est.a[1])
 			est = ft_swap_a(est);
 	/* IR METIENDO UNO A UNO, OBSERVANDO SI SALE MEJOR HACER RRA O RA HASTA LLEGAR AL NUMERO*/
 	
-		
+	printf(" \nMETEMOS EN A");
 	while (est.longa != est.longc)
 	{
 		if (ft_get_count(&est) == 1)
@@ -137,7 +138,6 @@ struct s_strc	ft_one_hun(t_strc_gen est)
 
 /*int	ft_long_binary(t_strc_gen est)
 {
-
 }
 */
 struct s_strc	ft_five_hun(t_strc_gen est)
