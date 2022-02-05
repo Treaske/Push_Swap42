@@ -65,7 +65,7 @@ struct s_strc	ft_pass_a(t_strc_gen est)
 	est.longb++;
 	est.longa--;
 	
-	printf("====pb====");
+	printf("====pb====\n");
 	auxa = malloc (sizeof(int) * (est.longa));
 	auxb = malloc (sizeof(int) * (est.longb));
 	auxb[0] = est.a[0];
@@ -105,7 +105,7 @@ struct s_strc	ft_pass_b(t_strc_gen est)
 	est.longa++;
 	if (est.longb > 0)
 		est.longb--;
-	printf("====pa====");
+	printf("====pa====\n");
 	auxa = malloc (sizeof(int) * (est.longa));
 	auxb = malloc (sizeof(int) * (est.longb));
 	auxa[0] = est.b[0];
@@ -150,21 +150,6 @@ struct s_strc	ft_rot_a(t_strc_gen estruc)
 	}
 	estruc.a[x] = aux;
 	estruc.count_mov++;
-
-	
-	/* MOSTRAR LAS DOS LISTAS*/
-		x = 0;
-		while (x != estruc.longb)
-		{
-			printf(" \nb=%i= ", estruc.b[x]);
-			x++;
-		}
-		x = 0;
-		while (x != estruc.longa)
-		{
-			printf(" \na=%i= ", estruc.a[x]);
-			x++;
-		}
 	return (estruc);
 }
 
