@@ -160,8 +160,7 @@ struct s_strc	ft_five_hun(t_strc_gen est)
 	x = 0;
 	y = 0;
 	j = 0;
-	printf("ERROR\n");
-	printf("long de c = %i\n", est.longc);
+	
 	while (x != est.longc)
 	{
 		j = 0;
@@ -194,55 +193,25 @@ struct s_strc	ft_five_hun(t_strc_gen est)
 			if (((est.a[0] >> j) & 1) == 0)
 				est = ft_pass_a(est);
 			else
-				est = ft_rrot_a(est);
+				est = ft_rot_a(est);
 			y++;
 		}
-
-		x = 0;
-		while (x != est.longb)
-		{
-			printf(" \nb=%i= ", est.b[x]);
-			x++;
-		}
-		x = 0;
-		while (x != est.longa)
-		{
-			printf(" \na=%i= ", est.a[x]);
-			x++;
-		}
-		
-		x = 9;
-		getchar();
 		// volver a pasar á a
 		y = est.longb;
-		printf("\n longitud de B: %i\n", est.longb);
-		
 		while (y != 0)
 		{	
 			est = ft_pass_b(est);
-			printf("numero: %i", y);
 			y--;
 			
 		}
 		j++;
-		printf("\n j: %i\n", j);
-		/* MOSTRAR LAS DOS LISTAS*/
-		/*
-		x = 0;
-		while (x != est.longb)
-		{
-			printf(" \nb=%i= ", est.b[x]);
-			x++;
-		}
-		x = 0;
-		while (x != est.longa)
-		{
-			printf(" \na=%i= ", est.a[x]);
-			x++;
-		}
-		
-		x = 9;
-		*/
+	}
+	//reasignar
+	x = 0;
+	while (x != est.longc)
+	{
+		est.a[x] = est.c[x];
+		x++;
 	}
 	return (est);
 }
