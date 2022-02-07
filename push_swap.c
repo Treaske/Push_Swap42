@@ -47,19 +47,19 @@ int ft_count_arg(char *argv)
 
 	num = 0;
 	x = 0;
-	while(argv[x + 1] != '\0')
+	while(argv[x] != '\0')
 	{
 		if (argv[x] != ' ')
 		{
-			if (argv[x + 1] == '\0')
-				num++;
+			num++;
+			while (argv[x] != ' ' && argv[x] != 0)
+				x++;
 		}
 		else if (argv[x] == ' ')
 		{
-			if ((x != 0) && (argv[x - 1] != ' '))
-				num++;
+			while(argv[x] == ' ')
+				x++;
 		}
-		x++;
 	}
 	return (num);
 }
@@ -105,6 +105,8 @@ int *ft_split(char *s, int *a, int y, t_strc_gen *est)
 	if (!s)
 		return (NULL);
 	countw = ft_count_arg(s);
+	printf("countwords == %i", countw);
+	printf("count y == %i", y);
 	aux = malloc(sizeof(int) * (countw + y));
 	while (x != y)
 	{
@@ -118,11 +120,19 @@ int *ft_split(char *s, int *a, int y, t_strc_gen *est)
 		while (*s == ' ' && *s != '\0')
 			s++;
 		aux[x] = get_word(s, est);
+		printf("aux == %i\n", aux[x]);
 		while (*s != ' ' && *s != '\0')
 			s++;
 		x++;
+		printf("Hola buenos dias");
 		countw--;
 	}
+	x = 0;
+	/*while(aux[x] != 0)
+	{
+		printf("---%i---", aux[x]);
+		x++;
+	}*/
 	return (aux);
 }
 
@@ -140,33 +150,58 @@ int *ft_get_number(int argc, char **argv, t_strc_gen *est)
 	int aux;
 	int	x;
 	int num;
+	int	y;
+	int	z;
+	int	*auxy;
+	int	countw;
 
 	aux = 0;
 	x = 0;
+	z = 0;
+	y = 0;
 	a = malloc(sizeof(int) * argc);
 	//recorro todos los argumentos
 	while (x != argc)
 	{
-		num = ft_count_arg(argv[x + 1]);
+		num = ft_count_arg(argv[z + 1]);
 		//printf("\n num : %i\n", num);
 		if(num < 0)
 			est->error = 1;
-		else if(num == 0)
+		else if(num == 1)
 		{
-			aux = ft_atoi(argv[x + 1], est);
-			
-			a[x] = aux;
-			printf(" <%i> ", a[x]);
+			aux = ft_atoi(argv[z + 1], est);
+			printf("Me meto en el num == 1\n");
+			a[z] = aux;
+			printf(" <%i> ", a[z]);
 		}
 		else
 		{
-			a = ft_split(argv[x + 1], a, x, est);
-			printf(" <%i> ", a[x]);
+			printf("Me meto en el num < 0\n");
+			countw = ft_count_arg(argv[z + 1]);
+			printf("\ncountwords == %i", countw);
+			printf("\ncount x == %i\n", x);
+			auxy = malloc(sizeof(int) * (countw + x));
+			auxy = ft_split(argv[x + 1], a, x, est);
+			y = 0;
+			a = malloc(sizeof(int) * (countw + x));
+			y = 0;
+			while(y != countw + x)
+			{
+				
+				a[y] = auxy[y];
+				printf("\na == %i\n", a[y]);
+				y++;
+			}
+			
+			printf("\na == %i\n", a[y - 1]);
+			argc = argc + countw + x;
+			x = x + countw + x;
 		}
 		if (est->error != 0)
 			return (0);
-		
+		est->longa = countw + z;
 		x++;
+		z++;
 	}
 	return (a);
 }
@@ -214,14 +249,17 @@ int	main(int argc, char **argv)
 {
 	t_strc_gen	est;
 	int			x;
+	int			y;
 
 	x = 0;
+	y = 0;
 	est.longa = argc - 1;
 	est.longb = 0;
 	est.error = 0;
 	est.aux = 3;
 	est.count_mov = 0;
 	est.a = ft_get_number(est.longa, argv, &est);
+	printf("long a == %i", est.longa);
 	est.longc = est.longa;
 	if (est.error != 0)
 	{
@@ -229,6 +267,14 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	est = ft_make_c(est);
+	while (x != est.longc)
+	{
+		if (est.a[x] == est.c[x])
+			y++;
+		x++;
+	}
+	if (y == est.longc)
+		return (0);
 	est.mid = est.c[est.longa/2];
 	if (est.error != 0)
 	{
