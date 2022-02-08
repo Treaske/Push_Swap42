@@ -159,47 +159,80 @@ int *ft_get_number(int argc, char **argv, t_strc_gen *est)
 	x = 0;
 	z = 0;
 	y = 0;
-	a = malloc(sizeof(int) * argc);
+	a = malloc(sizeof(int) * 1);
 	//recorro todos los argumentos
 	while (x != argc)
 	{
 		num = ft_count_arg(argv[z + 1]);
-		//printf("\n num : %i\n", num);
+		printf("\n num : %i\n", num);
 		if(num < 0)
 			est->error = 1;
 		else if(num == 1)
 		{
 			aux = ft_atoi(argv[z + 1], est);
 			printf("Me meto en el num == 1\n");
-			a[z] = aux;
-			printf(" <%i> ", a[z]);
+			//printf("Me meto en el num == 1 %i\n", z);
+			free(auxy);
+		
+			y = 0;
+			//printf("\na =v= %i\n", x);
+			if (x != 0)
+			{
+				printf("Me meto en el num == 1\n");
+				auxy = malloc(sizeof(int) * ( x + 1));
+				if(x == 1)
+					auxy[0] = a[0];
+				else
+				{
+					printf("Me meto en el num == 1\n");
+					while(y != x - 1)
+					{
+						auxy[y] = a[y];
+						//printf("\na =v= %i\n", a[y]);
+						y++;
+					}
+					a = malloc(sizeof(int) * (x + 1));
+					y = 0;
+					while(y != x - 1)
+					{
+						a[y] = auxy[y];
+						printf("\na == %i\n", a[y]);
+						y++;
+					}		
+				}
+				a = malloc(sizeof(int) * (x+ 1));
+			}
+			printf("\nx == %i\n", x );
+			a[x] = aux;
+			printf("\na =v= %i\n", a[x]);
 		}
 		else
 		{
 			printf("Me meto en el num < 0\n");
 			countw = ft_count_arg(argv[z + 1]);
 			printf("\ncountwords == %i", countw);
-			printf("\ncount x == %i\n", x);
-			auxy = malloc(sizeof(int) * (countw + x));
-			auxy = ft_split(argv[x + 1], a, x, est);
+			printf("\ncount x == %i\n",z);
+			auxy = malloc(sizeof(int) * (countw + z));
+			y = 0;
+			
+			auxy = ft_split(argv[z + 1], a, x, est);
 			y = 0;
 			a = malloc(sizeof(int) * (countw + x));
 			y = 0;
 			while(y != countw + x)
 			{
-				
 				a[y] = auxy[y];
-				printf("\na == %i\n", a[y]);
+				
 				y++;
 			}
-			
-			printf("\na == %i\n", a[y - 1]);
-			argc = argc + countw + x;
-			x = x + countw + x;
+			argc = argc + countw;
+
+			x = x + countw;
 		}
 		if (est->error != 0)
 			return (0);
 		est->longa = countw + z;
+		printf("\na =c= %i\n", a[x]);
 		x++;
 		z++;
 	}
@@ -253,12 +286,19 @@ int	main(int argc, char **argv)
 
 	x = 0;
 	y = 0;
+	if(argc == 1)
+		return (0);
 	est.longa = argc - 1;
 	est.longb = 0;
 	est.error = 0;
 	est.aux = 3;
 	est.count_mov = 0;
 	est.a = ft_get_number(est.longa, argv, &est);
+	while(y != est.longa)
+	{
+		printf("\nprinteo a -- %i --\n", est.a[y]);
+		y++;
+	}
 	printf("long a == %i", est.longa);
 	est.longc = est.longa;
 	if (est.error != 0)
