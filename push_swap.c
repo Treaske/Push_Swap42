@@ -82,20 +82,27 @@ int get_word(char *s, t_strc_gen *est)
 
 	x = 0;
 	wlen = ft_len(s);
-	aux = malloc(sizeof(char) * (wlen + 1));
+	printf("la longitud es:  %i", wlen);
+	aux = malloc(sizeof(char) * (wlen));
 	if (!aux)
 		return (0);
-	while (x < wlen)
+	while (x != wlen)
 	{
-		aux[x] = s[x];
+		printf(": %c\n", s[x]);
 		x++;
 	}
-	aux[wlen] = '\0';
+	x = 0;
+	while (x != wlen)
+	{
+		aux[x] = s[x];
+		printf("la palabra es: %c", aux[x]);
+		x++;
+	}
 	x = ft_atoi(aux, est);
 	return (x);
 }
 
-int *ft_split(char *s, int *a, int y, t_strc_gen *est)
+int *ft_split(char *s, t_strc_gen est)
 {
 	int *aux;
 	int	x;
@@ -105,27 +112,19 @@ int *ft_split(char *s, int *a, int y, t_strc_gen *est)
 	if (!s)
 		return (NULL);
 	countw = ft_count_arg(s);
-	printf("countwords == %i", countw);
-	printf("count y == %i", y);
-	aux = malloc(sizeof(int) * (countw + y));
-	while (x != y)
-	{
-		aux[x] = a[x];
-		x++;
-	}
+	printf("\ncountwords split == %i", countw);
+	aux = malloc(sizeof(int) * (countw));
 	if (!aux)
 		return (NULL);
-	while (countw > 0)
+	while (x != countw)
 	{
 		while (*s == ' ' && *s != '\0')
 			s++;
-		aux[x] = get_word(s, est);
+		aux[x] = get_word(s, &est);
 		printf("aux == %i\n", aux[x]);
 		while (*s != ' ' && *s != '\0')
 			s++;
 		x++;
-		printf("Hola buenos dias");
-		countw--;
 	}
 	x = 0;
 	/*while(aux[x] != 0)
@@ -137,7 +136,7 @@ int *ft_split(char *s, int *a, int y, t_strc_gen *est)
 }
 
 // ----------------------------------split
-int *ft_get_number(int argc, char **argv, t_strc_gen *est)
+int *ft_get_number(int longa, char **argv, t_strc_gen *est)
 {
 	/*
 		aqui recojo todos los numeros para tenerlos como int y poder trabajar con ellos 
@@ -147,91 +146,53 @@ int *ft_get_number(int argc, char **argv, t_strc_gen *est)
 
 	*/
 	int	*a;
+	int	num;
 	int aux;
+	int *auxy;
 	int	x;
-	int num;
 	int	y;
 	int	z;
-	int	*auxy;
 	int	countw;
 
 	aux = 0;
+	num = 0;
 	x = 0;
-	z = 0;
+	z = 1;
 	y = 0;
-	a = malloc(sizeof(int) * 1);
+	a = malloc(sizeof(int) * longa);
 	//recorro todos los argumentos
-	while (x != argc)
+	while (x != longa)
 	{
-		num = ft_count_arg(argv[z + 1]);
+		num = ft_count_arg(argv[x + 1]);
 		printf("\n num : %i\n", num);
 		if(num < 0)
 			est->error = 1;
 		else if(num == 1)
 		{
-			aux = ft_atoi(argv[z + 1], est);
+			aux = ft_atoi(argv[z], est);
 			printf("Me meto en el num == 1\n");
-			//printf("Me meto en el num == 1 %i\n", z);
-			free(auxy);
-		
-			y = 0;
-			//printf("\na =v= %i\n", x);
-			if (x != 0)
-			{
-				printf("Me meto en el num == 1\n");
-				auxy = malloc(sizeof(int) * ( x + 1));
-				if(x == 1)
-					auxy[0] = a[0];
-				else
-				{
-					printf("Me meto en el num == 1\n");
-					while(y != x - 1)
-					{
-						auxy[y] = a[y];
-						//printf("\na =v= %i\n", a[y]);
-						y++;
-					}
-					a = malloc(sizeof(int) * (x + 1));
-					y = 0;
-					while(y != x - 1)
-					{
-						a[y] = auxy[y];
-						printf("\na == %i\n", a[y]);
-						y++;
-					}		
-				}
-				a = malloc(sizeof(int) * (x+ 1));
-			}
-			printf("\nx == %i\n", x );
+			printf("el num == 1 %i\n", aux);
 			a[x] = aux;
 			printf("\na =v= %i\n", a[x]);
 		}
 		else
 		{
 			printf("Me meto en el num < 0\n");
-			countw = ft_count_arg(argv[z + 1]);
+			countw = ft_count_arg(argv[x + 1]);
 			printf("\ncountwords == %i", countw);
-			printf("\ncount x == %i\n",z);
-			auxy = malloc(sizeof(int) * (countw + z));
-			y = 0;
-			
-			auxy = ft_split(argv[z + 1], a, x, est);
-			y = 0;
-			a = malloc(sizeof(int) * (countw + x));
-			y = 0;
-			while(y != countw + x)
+			printf("\ncount x == %i\n",x);
+			auxy = malloc(sizeof(int) * (countw));
+			auxy = ft_split(argv[z], *est);
+			while(x != countw + x)
 			{
-				a[y] = auxy[y];
-				
+				a[x] = auxy[y];
 				y++;
+				x++;
 			}
-			argc = argc + countw;
-
 			x = x + countw;
 		}
 		if (est->error != 0)
 			return (0);
-		est->longa = countw + z;
 		printf("\na =c= %i\n", a[x]);
 		x++;
 		z++;
@@ -278,6 +239,24 @@ struct s_strc ft_make_c(t_strc_gen est)
 	return (est);
 }
 
+int ft_get_long_args(int argc, char **argv)
+{
+	int cont;
+	int	x;
+
+	x = 1;
+	cont = 0;
+	while (x != argc)
+	{
+		if(ft_count_arg(argv[x]) == 1)
+			cont++;
+		else
+			cont = cont + ft_count_arg(argv[x]);
+		x++;
+	}
+	return (cont);
+}
+
 int	main(int argc, char **argv)
 {
 	t_strc_gen	est;
@@ -288,7 +267,8 @@ int	main(int argc, char **argv)
 	y = 0;
 	if(argc == 1)
 		return (0);
-	est.longa = argc - 1;
+	est.longa = ft_get_long_args(argc, argv);
+	printf("\n long a -- %i --\n", est.longa);
 	est.longb = 0;
 	est.error = 0;
 	est.aux = 3;
