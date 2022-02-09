@@ -27,6 +27,7 @@ int	ft_atoi(const char *str, t_strc_gen *est)
 			sign = -1;
 		str++;
 	}
+	printf("el str: %c\n", str[0]);
 	while (str[cont] >= '0' && str[cont] <= '9' && str[cont] != 0)
 	{
 		num = (num * 10) + (str[cont] - 48);
@@ -83,7 +84,7 @@ int get_word(char *s, t_strc_gen *est)
 	x = 0;
 	wlen = ft_len(s);
 	printf("la longitud es:  %i", wlen);
-	aux = malloc(sizeof(char) * (wlen));
+	aux = malloc(sizeof(char) * wlen + 1);
 	if (!aux)
 		return (0);
 	while (x != wlen)
@@ -98,6 +99,7 @@ int get_word(char *s, t_strc_gen *est)
 		printf("la palabra es: %c", aux[x]);
 		x++;
 	}
+	aux[x] = '\0';
 	x = ft_atoi(aux, est);
 	return (x);
 }
@@ -183,13 +185,19 @@ int *ft_get_number(int longa, char **argv, t_strc_gen *est)
 			printf("\ncount x == %i\n",x);
 			auxy = malloc(sizeof(int) * (countw));
 			auxy = ft_split(argv[z], *est);
-			while(x != countw + x)
+			printf("\n post split == %i \n", auxy[0]);
+			printf("\n post split == %i \n", auxy[1]);
+			printf("\n post split == %i \n", auxy[2]);
+			y = 0;
+			countw = countw + x;
+			while(x != countw)
 			{
 				a[x] = auxy[y];
+				printf("\nnumero post split == %i \n", a[x]);
 				y++;
 				x++;
 			}
-			x = x + countw;
+			x = countw;
 		}
 		if (est->error != 0)
 			return (0);
