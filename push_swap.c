@@ -53,7 +53,7 @@ int ft_count_arg(char *argv)
 		if (argv[x] != ' ')
 		{
 			num++;
-			while (argv[x] != ' ' && argv[x] != 0)
+			while (argv[x] != ' ' && argv[x] != '\0')
 				x++;
 		}
 		else if (argv[x] == ' ')
@@ -159,19 +159,20 @@ int *ft_get_number(int longa, char **argv, t_strc_gen *est)
 	aux = 0;
 	num = 0;
 	x = 0;
-	z = 1;
+	z = 0;
 	y = 0;
 	a = malloc(sizeof(int) * longa);
 	//recorro todos los argumentos
 	while (x != longa)
 	{
-		num = ft_count_arg(argv[x + 1]);
+		num = ft_count_arg(argv[z + 1]);
 		printf("\n num : %i\n", num);
+		printf("\n num : %s\n", argv[z + 1]);
 		if(num < 0)
 			est->error = 1;
 		else if(num == 1)
 		{
-			aux = ft_atoi(argv[z], est);
+			aux = ft_atoi(argv[z + 1], est);
 			printf("Me meto en el num == 1\n");
 			printf("el num == 1 %i\n", aux);
 			a[x] = aux;
@@ -180,24 +181,22 @@ int *ft_get_number(int longa, char **argv, t_strc_gen *est)
 		else
 		{
 			printf("Me meto en el num < 0\n");
-			countw = ft_count_arg(argv[x + 1]);
+			countw = ft_count_arg(argv[z + 1]);
 			printf("\ncountwords == %i", countw);
 			printf("\ncount x == %i\n",x);
 			auxy = malloc(sizeof(int) * (countw));
-			auxy = ft_split(argv[z], *est);
-			printf("\n post split == %i \n", auxy[0]);
-			printf("\n post split == %i \n", auxy[1]);
-			printf("\n post split == %i \n", auxy[2]);
+			auxy = ft_split(argv[z + 1], *est);
 			y = 0;
 			countw = countw + x;
 			while(x != countw)
 			{
 				a[x] = auxy[y];
 				printf("\nnumero post split == %i \n", a[x]);
+				printf("\nnumero -%i \n", y);
 				y++;
 				x++;
 			}
-			x = countw;
+			x = countw - 1;
 		}
 		if (est->error != 0)
 			return (0);
@@ -273,6 +272,7 @@ int	main(int argc, char **argv)
 
 	x = 0;
 	y = 0;
+	//system(leaks -a)
 	if(argc == 1)
 		return (0);
 	est.longa = ft_get_long_args(argc, argv);
