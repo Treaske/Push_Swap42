@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+include "push_swap.h"
 
 int	ft_atoi(const char *str, t_strc_gen *est)
 {
@@ -27,7 +27,6 @@ int	ft_atoi(const char *str, t_strc_gen *est)
 			sign = -1;
 		str++;
 	}
-	printf("el str: %c\n", str[0]);
 	while (str[cont] >= '0' && str[cont] <= '9' && str[cont] != 0)
 	{
 		num = (num * 10) + (str[cont] - 48);
@@ -83,24 +82,20 @@ int get_word(char *s, t_strc_gen *est)
 
 	x = 0;
 	wlen = ft_len(s);
-	printf("la longitud es:  %i", wlen);
 	aux = malloc(sizeof(char) * wlen + 1);
 	if (!aux)
 		return (0);
 	while (x != wlen)
-	{
-		printf(": %c\n", s[x]);
 		x++;
-	}
 	x = 0;
 	while (x != wlen)
 	{
 		aux[x] = s[x];
-		printf("la palabra es: %c", aux[x]);
 		x++;
 	}
 	aux[x] = '\0';
 	x = ft_atoi(aux, est);
+	free(aux);
 	return (x);
 }
 
@@ -114,7 +109,6 @@ int *ft_split(char *s, t_strc_gen est)
 	if (!s)
 		return (NULL);
 	countw = ft_count_arg(s);
-	printf("\ncountwords split == %i", countw);
 	aux = malloc(sizeof(int) * (countw));
 	if (!aux)
 		return (NULL);
@@ -123,17 +117,11 @@ int *ft_split(char *s, t_strc_gen est)
 		while (*s == ' ' && *s != '\0')
 			s++;
 		aux[x] = get_word(s, &est);
-		printf("aux == %i\n", aux[x]);
 		while (*s != ' ' && *s != '\0')
 			s++;
 		x++;
 	}
 	x = 0;
-	/*while(aux[x] != 0)
-	{
-		printf("---%i---", aux[x]);
-		x++;
-	}*/
 	return (aux);
 }
 
@@ -166,24 +154,16 @@ int *ft_get_number(int longa, char **argv, t_strc_gen *est)
 	while (x != longa)
 	{
 		num = ft_count_arg(argv[z + 1]);
-		printf("\n num : %i\n", num);
-		printf("\n num : %s\n", argv[z + 1]);
 		if(num < 0)
 			est->error = 1;
 		else if(num == 1)
 		{
 			aux = ft_atoi(argv[z + 1], est);
-			printf("Me meto en el num == 1\n");
-			printf("el num == 1 %i\n", aux);
 			a[x] = aux;
-			printf("\na =v= %i\n", a[x]);
 		}
 		else
 		{
-			printf("Me meto en el num < 0\n");
 			countw = ft_count_arg(argv[z + 1]);
-			printf("\ncountwords == %i", countw);
-			printf("\ncount x == %i\n",x);
 			auxy = malloc(sizeof(int) * (countw));
 			auxy = ft_split(argv[z + 1], *est);
 			y = 0;
@@ -191,16 +171,14 @@ int *ft_get_number(int longa, char **argv, t_strc_gen *est)
 			while(x != countw)
 			{
 				a[x] = auxy[y];
-				printf("\nnumero post split == %i \n", a[x]);
-				printf("\nnumero -%i \n", y);
 				y++;
 				x++;
 			}
 			x = countw - 1;
+			free(auxy);
 		}
 		if (est->error != 0)
 			return (0);
-		printf("\na =c= %i\n", a[x]);
 		x++;
 		z++;
 	}
@@ -258,10 +236,15 @@ int ft_get_long_args(int argc, char **argv)
 		if(ft_count_arg(argv[x]) == 1)
 			cont++;
 		else
-			cont = cont + ft_count_arg(argv[x]);
+			cont += ft_count_arg(argv[x]);
 		x++;
 	}
 	return (cont);
+}
+
+void	leaks(void)
+{
+	system("leaks -q a.out");
 }
 
 int	main(int argc, char **argv)
@@ -272,22 +255,18 @@ int	main(int argc, char **argv)
 
 	x = 0;
 	y = 0;
-	//system(leaks -a)
+
+	
 	if(argc == 1)
 		return (0);
 	est.longa = ft_get_long_args(argc, argv);
-	printf("\n long a -- %i --\n", est.longa);
 	est.longb = 0;
 	est.error = 0;
 	est.aux = 3;
 	est.count_mov = 0;
 	est.a = ft_get_number(est.longa, argv, &est);
 	while(y != est.longa)
-	{
-		printf("\nprinteo a -- %i --\n", est.a[y]);
 		y++;
-	}
-	printf("long a == %i", est.longa);
 	est.longc = est.longa;
 	if (est.error != 0)
 	{
@@ -322,7 +301,9 @@ int	main(int argc, char **argv)
 		x++;
 	}
 	//ft_clean_max(est);
-	printf(" \nNUMERO DE MOVIMIENTOS- %i- \n", est.count_mov);
+	free(est.a);
+	free(est.c);
+	atexit(leaks);
 	return (0);
 }
 /*
