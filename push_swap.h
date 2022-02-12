@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:11:07 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/24 18:07:20 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/02/12 17:00:25 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ t_strc_gen	ft_rrot(t_strc_gen estruc);
 
 int			ft_get_less(t_strc_gen est, int *a);
 int			ft_get_max(t_strc_gen est, int *a);
+int			*ft_make_auxa(int x, int longa, int *auxa, int *a);
+int			*ft_make_auxb(int longb, int *auxb, int *b);
 
 t_strc_gen	ft_three(t_strc_gen est);
 t_strc_gen	ft_one_hun(t_strc_gen est);
