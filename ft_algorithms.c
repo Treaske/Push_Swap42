@@ -47,9 +47,7 @@ int	ft_check_lower(t_strc_gen est)
 	while (x < est.longa)
 	{
 		if (est.a[x] <= est.mid)
-		{
 			return (1);
-		}
 		x++;
 	}
 	return (0);
@@ -65,11 +63,10 @@ int	ft_get_count(t_strc_gen *est)
 	//if(est->b[count] != est->c[est->longc - est->aux])
 	//printf("\n  NUMERO DE B : %i\n", est->b[count]);
 	//printf("\n  NUMERO A BUSCAR  : %i\n", est->c[est->longc - est->aux]);
-
 	while (est->b[count] != est->c[est->longc - est->aux])
 		count++;
-	if (count < (est->longb/2))
-		return (1); 
+	if (count < (est->longb / 2))
+		return (1);
 	//si es menos de la mitad de la longitud lo mejor es rot_b
 	return (2);
 }
@@ -91,25 +88,15 @@ struct s_strc	ft_one_hun(t_strc_gen est)
 		while (ft_check_lower(est) != 0 && est.longa != 2)
 		{
 			if (est.a[0] <= est.mid)
-			{
 				est = ft_pass_a(est);
-			}
 			else
-			{
 				est = ft_rot_a(est);
-			}
-			
 		}
-		
 	}
-	getchar();
-	printf(" \nORDENAMOS LOS QUE QUEDAN ");
 	/* ORDENAR LOS DOS QUE SE QUEDAN */
 		if (est.a[0] > est.a[1])
 			est = ft_swap_a(est);
 	/* IR METIENDO UNO A UNO, OBSERVANDO SI SALE MEJOR HACER RRA O RA HASTA LLEGAR AL NUMERO*/
-	
-	printf(" \nMETEMOS EN A");
 	while (est.longa != est.longc)
 	{
 		if (ft_get_count(&est) == 1)
@@ -130,10 +117,8 @@ struct s_strc	ft_one_hun(t_strc_gen est)
 		}
 		est.aux++;
 		est = ft_pass_b(est);
-		//getchar();
 	}
 	return (est);
-		
 }
 
 /*int	ft_long_binary(t_strc_gen est)
@@ -148,13 +133,11 @@ struct s_strc	ft_five_hun(t_strc_gen est)
 		3- realizar bucle en cada cifra de binario que recorra todo a y pase a b los 0
 		4- devolver los de b á a y repetir 3-
 	*/
-
 	//reasignar los numeros
-
 	int	x;
 	int	j;
 	int	y;
-	int i;
+	int	i;
 
 	i = 0;
 	x = 0;
@@ -179,7 +162,6 @@ struct s_strc	ft_five_hun(t_strc_gen est)
 	{
 		i++;
 	}
-	//i++;
 	// sacar la longitud en bytes
 
 	// bucle que pasa los 0 a b
@@ -202,7 +184,6 @@ struct s_strc	ft_five_hun(t_strc_gen est)
 		{	
 			est = ft_pass_b(est);
 			y--;
-			
 		}
 		j++;
 	}
