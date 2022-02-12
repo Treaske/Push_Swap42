@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-include "push_swap.h"
+#include "push_swap.h"
 
 int	ft_atoi(const char *str, t_strc_gen *est)
 {
@@ -42,12 +42,12 @@ int	ft_atoi(const char *str, t_strc_gen *est)
  // split-----------------------------------------------
 int ft_count_arg(char *argv)
 {
-	int num;
-	int x;
+	int	num;
+	int	x;
 
 	num = 0;
 	x = 0;
-	while(argv[x] != '\0')
+	while (argv[x] != '\0')
 	{
 		if (argv[x] != ' ')
 		{
@@ -74,7 +74,7 @@ static int	ft_len(char *s)
 	return (x);
 }
 
-int get_word(char *s, t_strc_gen *est)
+int	get_word(char *s, t_strc_gen *est)
 {
 	int		x;
 	int		wlen;
@@ -85,8 +85,6 @@ int get_word(char *s, t_strc_gen *est)
 	aux = malloc(sizeof(char) * wlen + 1);
 	if (!aux)
 		return (0);
-	while (x != wlen)
-		x++;
 	x = 0;
 	while (x != wlen)
 	{
@@ -99,9 +97,9 @@ int get_word(char *s, t_strc_gen *est)
 	return (x);
 }
 
-int *ft_split(char *s, t_strc_gen est)
+int	*ft_split(char *s, t_strc_gen est)
 {
-	int *aux;
+	int	*aux;
 	int	x;
 	int	countw;
 
@@ -137,8 +135,8 @@ int *ft_get_number(int longa, char **argv, t_strc_gen *est)
 	*/
 	int	*a;
 	int	num;
-	int aux;
-	int *auxy;
+	int	aux;
+	int	*auxy;
 	int	x;
 	int	y;
 	int	z;
@@ -190,7 +188,7 @@ struct s_strc ft_make_c(t_strc_gen est)
 	int	x;
 	int	aux;
 	int	y;
-	
+
 	x = 0;
 	y = 1;
 	est.c = malloc(sizeof(int) * est.longa);
@@ -224,16 +222,16 @@ struct s_strc ft_make_c(t_strc_gen est)
 	return (est);
 }
 
-int ft_get_long_args(int argc, char **argv)
+int	ft_get_long_args(int argc, char **argv)
 {
-	int cont;
+	int	cont;
 	int	x;
 
 	x = 1;
 	cont = 0;
 	while (x != argc)
 	{
-		if(ft_count_arg(argv[x]) == 1)
+		if (ft_count_arg(argv[x]) == 1)
 			cont++;
 		else
 			cont += ft_count_arg(argv[x]);
@@ -254,10 +252,8 @@ int	main(int argc, char **argv)
 	int			y;
 
 	x = 0;
-	y = 0;
-
-	
-	if(argc == 1)
+	y = 0;	
+	if (argc == 1)
 		return (0);
 	est.longa = ft_get_long_args(argc, argv);
 	est.longb = 0;
@@ -265,8 +261,6 @@ int	main(int argc, char **argv)
 	est.aux = 3;
 	est.count_mov = 0;
 	est.a = ft_get_number(est.longa, argv, &est);
-	while(y != est.longa)
-		y++;
 	est.longc = est.longa;
 	if (est.error != 0)
 	{
@@ -281,11 +275,11 @@ int	main(int argc, char **argv)
 		x++;
 	}
 	if (y == est.longc)
-		return (0);
-	est.mid = est.c[est.longa/2];
+		return (0);	
+	est.mid = est.c[est.longa / 2];
 	if (est.error != 0)
 	{
-		write(1, "Error 2\n", 7);
+		write(1, "Error 3\n", 7);
 		return (0);
 	}
 	if (est.longa <= 3)
@@ -300,7 +294,6 @@ int	main(int argc, char **argv)
 		printf(" - %i- ", est.a[x]);
 		x++;
 	}
-	//ft_clean_max(est);
 	free(est.a);
 	free(est.c);
 	atexit(leaks);
